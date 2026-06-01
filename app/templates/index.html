@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <link rel="stylesheet" href="/static/style.css?v=2">
+</head>
+
+<body>
+    <header>
+        <h1>{{title}}</h1>
+        <nav>
+            <a href="/">홈으로</a>
+            <a href="/favorites">위시리스트 보기</a>
+        </nav>
+    </header>
+    <center>
+        <form id="search_form" action="/search" method="get">
+            <input type="text" placeholder="검색어 (예: 기계식 키보드)" id="search_input" name="q" value="{{keyword or ''}}">
+            <button type="submit">검색</button>
+        </form>
+    </center>
+    <main>
+        {% if products %}
+        <center>
+            <h3>{{products|length}}개의 상품이 있습니다.</h3>
+        </center>
+        <section class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-content">
+                    {% if product.image %}
+                    <img src="{{product.image}}" class="product-img" alt="상품 이미지">
+                    {% else %}
+                    <div class="product-img" style="background-color: #eee; line-height: 150px;">이미지 없음</div>
+                    {% endif %}
+                    
+                    <h3>
+                        {% if product.link %}
+                        <a href="{{product.link}}" target="_blank">
+                            {% if product.title | length > 25 %}
+                                {{product.title[:25]}}...
+                            {% else %}
+                                {{product.title}}
+                            {% endif %}
+                        </a>
+                        {% else %}
+                            {% if product.title | length > 25 %}
+                                {{product.title[:25]}}...
+                            {% else %}
+                                {{product.title}}
+                            {% endif %}
+                        {% endif %}
+                    </h3>
+                    <p><strong>쇼핑몰:</strong> {{product.mall_name}}</p>
+                    {% if product.brand %}
+                    <p><strong>브랜드/제조사:</strong> {{product.brand}}</p>
+                    {% endif %}
+                    {% if product.category %}
+                    <p><strong>분류:</strong> {{product.category}}</p>
+                    {% endif %}
+                    <p class="price">{{ "{:,}".format(product.price) }}원</p>
+                </div>
+                
+                <form action="/favorites" method="post">
+                    <input type="hidden" name="keyword" value="{{keyword or ''}}">
+                    <input type="hidden" name="title" value="{{product.title}}">
+                    <input type="hidden" name="image" value="{{product.image}}">
+                    <input type="hidden" name="price" value="{{product.price}}">
+                    <input type="hidden" name="mall_name" value="{{product.mall_name}}">
+                    <input type="hidden" name="link" value="{{product.link}}">
+                    <input type="hidden" name="brand" value="{{product.brand}}">
+                    <input type="hidden" name="category" value="{{product.category}}">
+                    <input type="hidden" name="next_url" value="{{next_url}}">
+                    
+                    {% if product.is_favorite %}
+                    <button type="submit" class="fav-btn">♥ 저장됨 (빼기)</button>
+                    {% else %}
+                    <button type="submit">♡ 저장하기</button>
+                    {% endif %}
+                </form>
+            </div>
+            {% endfor %}
+        </section>
+
+        {% elif keyword %}
+        <center>
+            <h3>검색 결과가 없습니다.</h3>
+        </center>
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>
