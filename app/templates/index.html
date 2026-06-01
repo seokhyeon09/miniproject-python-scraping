@@ -6,22 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-    <link rel="stylesheet" href="/static/style.css?v=2">
+    <link rel="stylesheet" href="/static/style.css?v=4">
 </head>
 
 <body>
-    <header>
-        <h1>{{title}}</h1>
-        <nav>
-            <a href="/"><b>홈으로</b></a>
+    <header class="app-header">
+        <h1 class="logo" style="display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            쇼핑 컬렉터
+        </h1>
+        <nav class="app-nav">
+            <a href="/" class="nav-btn home-btn">홈으로</a>
             {% if next_url == "/favorites" %}
-            <a href="javascript:history.back()"><b>뒤로가기</b></a>
+            <a href="javascript:history.back()" class="nav-btn back-btn">뒤로가기</a>
             {% else %}
-            <a href="/favorites"><b>위시리스트 보기</b></a>
+            <a href="/favorites" class="nav-btn wish-btn">위시리스트 보기</a>
             {% endif %}
         </nav>
     </header>
-    <center>
+    <center style="margin-top: 20px;">
+        <h2>{{title}}</h2>
         <form id="search_form" action="/search" method="get">
             <input type="text" placeholder="검색어 (예: 기계식 키보드)" id="search_input" name="q" value="{{keyword or ''}}">
             <button type="submit">검색</button>

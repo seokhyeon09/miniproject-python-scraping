@@ -77,7 +77,66 @@ section.product-grid {
 }
 nav {
     margin-bottom: 20px;
+    justify-content: center !important;
+    gap: 15px;
 }
 nav a {
-    margin-right: 15px;
+    margin-right: 0 !important;
 }
+
+/* App Header Layout */
+.app-header {
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    padding: 20px 40px !important;
+    max-width: 1200px;
+    margin: 0 auto !important;
+    border-bottom: 1px solid #eaeaea;
+}
+.app-header .logo {
+    margin: 0 !important;
+    font-size: 1.8em;
+    color: #2c3e50;
+}
+.app-nav {
+    margin: 0 !important;
+    display: flex;
+    gap: 12px;
+}
+
+/* Nav Buttons */
+.nav-btn {
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: bold;
+    text-decoration: none !important;
+    display: inline-block;
+    transition: all 0.2s ease;
+    font-size: 0.95em !important;
+}
+.home-btn {
+    background-color: #f1f3f5 !important;
+    color: #495057 !important;
+    border: 1px solid #ced4da !important;
+}
+.home-btn:hover {
+    background-color: #e9ecef !important;
+}
+.wish-btn {
+    background-color: #ff6b6b !important;
+    color: white !important;
+    border: 1px solid #ff6b6b !important;
+}
+.wish-btn:hover {
+    background-color: #fa5252 !important;
+}
+.back-btn {
+    background-color: #868e96 !important;
+    color: white !important;
+    border: 1px solid #868e96 !important;
+}
+.back-btn:hover {
+    background-color: #495057 !important;
+}
+
