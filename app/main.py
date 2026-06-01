@@ -68,7 +68,7 @@ async def read_item(request: Request, q: str):
 @app.post("/favorites")
 async def toggle_favorite(
     request: Request,
-    keyword: str = Form(...),
+    keyword: str = Form(""),
     title: str = Form(...),
     image: str = Form(...),
     price: int = Form(...),
