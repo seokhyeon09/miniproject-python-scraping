@@ -13,8 +13,12 @@
     <header>
         <h1>{{title}}</h1>
         <nav>
-            <a href="/">홈으로</a>
-            <a href="/favorites">위시리스트 보기</a>
+            <a href="/"><b>홈으로</b></a>
+            {% if next_url == "/favorites" %}
+            <a href="javascript:history.back()"><b>뒤로가기</b></a>
+            {% else %}
+            <a href="/favorites"><b>위시리스트 보기</b></a>
+            {% endif %}
         </nav>
     </header>
     <center>
